@@ -1,10 +1,20 @@
 const newsService = require("../services/news.service");
-const error = require("../error/error");
+const store = require("../store/news.store");
+const formatDistanceToNow = require("date-fns/formatDistanceToNow");
 
 const getInternationalNews = async () => {
-  const news = await newsService.getInternationalNews();
+  let newsData = store.getData();
 
-  return news;
+  if (!newsData.data.length) {
+    let newData = await newsService.getInternationalNews();
+    store.updateData(newData);
+  }
+  newsData = store.getData();
+
+  return {
+    news: newsData.data,
+    lastUpdatedAt: formatDistanceToNow(newsData.lastUpdatedAt),
+  };
 };
 
 module.exports = { getInternationalNews };
