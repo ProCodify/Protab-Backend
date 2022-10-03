@@ -30,7 +30,4 @@ const getInternationalNews = async () => {
 
   return compressedNews;
 };
-(async () => {
-  console.log(await getInternationalNews());
-})();
 module.exports = { getInternationalNews };
