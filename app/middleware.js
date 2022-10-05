@@ -2,14 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
-
+const config = require("../config/config");
 const middleware = [
   morgan("dev"),
   cors(),
   express.json(),
   rateLimit({
-    windowMs: 10 * 60 * 1000,
-    max: 10,
+    windowMs: config.rate.time * 60 * 1000,
+    max: config.rate.limit,
   }),
 ];
 
