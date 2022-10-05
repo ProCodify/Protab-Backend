@@ -10,6 +10,7 @@ const errorHandler = (error, _req, res, _next) => {
       message: error.message,
     });
   }
+  console.log(error);
   res.status(500).json({
     message: "Something went wrong.",
   });
