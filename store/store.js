@@ -1,14 +1,14 @@
 class store {
-  data;
+  data = {};
 
   constructor(initialData) {
-    this.data = { data: initialData, lastUpdatedAt: Date.now() };
+    this.data = { ...initialData, lastUpdatedAt: Date.now() };
   }
   getData() {
     return this.data;
   }
   updateData(newData) {
-    this.data = { data: newData, lastUpdatedAt: Date.now() };
+    this.data = { ...this.data, ...newData, lastUpdatedAt: Date.now() };
   }
 }
 
