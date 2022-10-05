@@ -1,19 +1,20 @@
 const weatherService = require("../services/weather.service");
 const formatDistanceToNow = require("date-fns/formatDistanceToNow");
 const store = require("../store/weather.store");
+const { isEmpty } = require("../util/object-utils");
+const updateCache = async () => {
+  store.updateData({ weather: await weatherService.fetchWeather() });
+};
 const getWeather = async () => {
-  let weatherData = store.getData();
-
-  if (!Object.keys(weatherData.data).length) {
-    let newData = await weatherService.fetchWeather();
-    store.updateData(newData);
+  if (!store.data.weather || isEmpty(store.data.weather)) {
+    await updateCache();
   }
-  weatherData = store.getData();
 
   return {
-    ...weatherData.data,
-    lastUpdatedAt: formatDistanceToNow(weatherData.lastUpdatedAt),
+    weather: store.data.weather,
+    lastUpdatedAt: store.data.lastUpdatedAt,
+    lastUpdatedAtRelative: formatDistanceToNow(store.data.lastUpdatedAt),
   };
 };
 
-module.exports = { getWeather };
+module.exports = { getWeather, updateCache };
