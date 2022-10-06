@@ -6,7 +6,7 @@ const { parse } = require("node-html-parser");
 
 const fetchInternationalNews = async (sources = "bbc-news") => {
   const baseUrl = "https://newsapi.org/v2";
-  console.log("Refreshing International new Data");
+  console.log("Refreshing International news Data", new Date().toUTCString());
 
   const response = await fetch(
     `${baseUrl}/top-headlines?sources=${sources}&apiKey=${process.env.NEWS_API_KEY}`
@@ -29,7 +29,7 @@ const fetchLocalNews = async () => {
   const SELECTOR =
     "#container > div > div.two-stories-with-load-more-wrapper.stories2AdWithLoadMore-m__wrapper__2Nvc4 > div.stories-set.stories2AdWithLoadMore-m__stories_set__27iKs > div > a";
   const news = [];
-  console.log("Refreshing local new data");
+  console.log("Refreshing local news data", new Date().toUTCString());
   const response = await fetch(URL);
   const body = await response.text();
   const document = parse(body);
