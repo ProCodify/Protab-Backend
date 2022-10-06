@@ -2,7 +2,7 @@ require("dotenv").config();
 const error = require("../error/error");
 const fetch = require("node-fetch");
 const baseUrl = "http://api.weatherapi.com/v1";
-
+const getStatusByWeatherText = require("../util/weather-status");
 const fetchWeather = async (query = "dhaka") => {
   try {
     console.log("Refreshing weather data");
@@ -12,7 +12,7 @@ const fetchWeather = async (query = "dhaka") => {
     const { current } = await response.json();
     return {
       temp_c: current?.temp_c,
-      condition: current?.condition?.text,
+      condition: getStatusByWeatherText(current?.condition?.text),
       latestUpdate: current?.last_updated,
     };
   } catch (err) {
