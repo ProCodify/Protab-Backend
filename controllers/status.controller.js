@@ -3,7 +3,7 @@ const createdAt = Date.now();
 
 const getStatus = () => {
   return {
-    status: "running",
+    data: { status: "running" },
     createdTimestamp: createdAt,
     createdTimestampRelative: formatDistanceToNow(createdAt),
   };

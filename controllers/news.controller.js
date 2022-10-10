@@ -13,7 +13,7 @@ const updateCache = async () => {
 const getLocalNews = async (length = 5) => {
   if (isEmpty(store.data.local)) await updateCache();
   return {
-    news: store.data.local.slice(0, length),
+    data: store.data.local.slice(0, length),
     lastUpdatedAt: store.data.lastUpdatedAt,
     lastUpdatedAtRelative: formatDistanceToNow(store.data.lastUpdatedAt),
   };
@@ -23,7 +23,7 @@ const getInternationalNews = async (length = 5) => {
   if (isEmpty(store.data.international)) await updateCache();
 
   return {
-    international: store.data.international.slice(0, length),
+    data: store.data.international.slice(0, length),
     lastUpdatedAt: store.data.lastUpdatedAt,
     lastUpdatedAtRelative: formatDistanceToNow(store.data.lastUpdatedAt),
   };

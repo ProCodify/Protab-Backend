@@ -11,7 +11,7 @@ const getWeather = async () => {
   }
 
   return {
-    weather: store.data.weather,
+    data: store.data.weather,
     lastUpdatedAt: store.data.lastUpdatedAt,
     lastUpdatedAtRelative: formatDistanceToNow(store.data.lastUpdatedAt),
   };
